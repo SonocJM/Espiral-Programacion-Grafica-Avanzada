@@ -27,10 +27,10 @@ Material:
     m_Ints: []
     m_Floats:
     - _AfectarEntorno: 1
-    - _Intensidad: 5
-    - _Velocidad: 8
+    - _Intensidad: 10
+    - _Velocidad: 3.6
     m_Colors:
-    - _ColorMax: {r: 1, g: 1, b: 0, a: 1}
+    - _ColorMax: {r: 1, g: 0.6468563, b: 0, a: 1}
     - _ColorMin: {r: 1, g: 0, b: 0, a: 1}
   m_BuildTextureStacks: []
   m_AllowLocking: 1
