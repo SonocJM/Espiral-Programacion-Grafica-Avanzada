@@ -60,24 +60,18 @@ Shader "Custom/VelaEfectoURP"
 
             float4 frag (Varyings input) : SV_Target
             {
-                // 1. Calculamos el tiempo con un pequeño ruido para efecto vela
                 float tiempo = _Time.y * _Velocidad;
                 
-                // Mezcla de senos para que no sea un parpadeo aburrido y rítmico
                 float oscilacion = (sin(tiempo) * 0.5 + 0.5) * (sin(tiempo * 2.1) * 0.2 + 0.8);
                 oscilacion = clamp(oscilacion, 0.0, 1.0);
-
-                // 2. Interpolación de color Rojo -> Naranja -> Amarillo
+                
                 float3 colorBase = lerp(_ColorMin.rgb, _ColorMax.rgb, oscilacion);
-
-                // 3. Lógica del Booleano para la Emisión
+                
                 float3 colorFinal = colorBase;
                 
                 #ifdef _AFECTAR_ENTORNO_ON
-                    // Si el bool está activo, multiplicamos por la intensidad
                     colorFinal *= (oscilacion * _Intensidad);
                 #else
-                    // Si está apagado, el color se queda estático o con brillo mínimo
                     colorFinal *= 0.5; 
                 #endif
 

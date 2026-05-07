@@ -19,8 +19,7 @@ Shader "Custom/Rainbow"
             HLSLPROGRAM
             #pragma vertex vert
             #pragma fragment frag
-
-            // Librerías necesarias para Unity 6 / URP
+            
             #include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Core.hlsl"
 
             struct Attributes
@@ -65,20 +64,14 @@ Shader "Custom/Rainbow"
 
             half4 frag (Varyings IN) : SV_Target
             {
-                // 1. Animación de UVs
                 float2 scrollingUV = IN.uv;
                 scrollingUV.y -= _Time.y * _Speed;
-
-                // 2. Muestreo de textura
+                
                 half4 texColor = SAMPLE_TEXTURE2D(_BaseMap, sampler_BaseMap, scrollingUV);
-
-                // 3. Color Arcoíris
-                // Usamos IN.uv.y para que el degradado sea estático en el objeto 
-                // pero cambie con el tiempo
+                
                 float hue = IN.uv.y * _Frequency + _Time.y;
                 float3 rainbow = HueToRGB(hue);
-
-                // 4. Mezcla final con intensidad de brillo
+                
                 half3 finalRGB = texColor.rgb * rainbow * _Emission;
 
                 return half4(finalRGB, texColor.a);
